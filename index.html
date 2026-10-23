@@ -1,0 +1,159 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>s-afanasiev · Portfolio</title>
+  <meta name="description" content="Interactive web graphics: three.js and PixiJS playable ads, floor plan to 3D, 360° panoramas, computational geometry." />
+  <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 32 32'%3E%3Cpath d='M4 6h14v8h10v12H4z' fill='%23ff8a1f'/%3E%3C/svg%3E" />
+  <style>
+    :root {
+      --bg: #0f1216;
+      --surface: #171b21;
+      --border: #262d36;
+      --text: #e8ebf0;
+      --muted: #9aa3b0;
+      --accent: #ff8a1f;
+      --chip: #212731;
+      color-scheme: dark;
+    }
+    @media (prefers-color-scheme: light) {
+      :root {
+        --bg: #f5f6f8;
+        --surface: #ffffff;
+        --border: #e2e5ea;
+        --text: #171a1f;
+        --muted: #5f6672;
+        --accent: #d9650a;
+        --chip: #eef0f3;
+        color-scheme: light;
+      }
+    }
+    * { box-sizing: border-box; }
+    body {
+      margin: 0;
+      background: var(--bg);
+      color: var(--text);
+      font: 16px/1.6 system-ui, -apple-system, "Segoe UI", Roboto, sans-serif;
+    }
+    main { max-width: 1080px; margin: 0 auto; padding: 56px 20px 40px; }
+    header { margin-bottom: 40px; }
+    .handle { margin: 0; font-size: 15px; font-weight: 600; letter-spacing: 0.04em; color: var(--accent); }
+    h1 { margin: 6px 0 12px; font-size: clamp(30px, 5vw, 44px); line-height: 1.1; }
+    .intro { max-width: 720px; margin: 0; color: var(--muted); font-size: 17px; }
+    .projects { display: grid; gap: 24px; }
+    .card {
+      display: grid;
+      grid-template-columns: minmax(0, 1.15fr) minmax(0, 1fr);
+      gap: 0;
+      background: var(--surface);
+      border: 1px solid var(--border);
+      border-radius: 16px;
+      overflow: hidden;
+    }
+    .card .shot { display: block; background: #000; aspect-ratio: 16 / 10; }
+    .card .shot img { display: block; width: 100%; height: 100%; object-fit: cover; transition: transform 0.25s; }
+    .card .shot:hover img { transform: scale(1.02); }
+    .body { padding: 22px 24px; display: grid; align-content: start; gap: 10px; }
+    .kind { margin: 0; font-size: 13px; font-weight: 600; color: var(--accent); letter-spacing: 0.03em; }
+    h2 { margin: 0; font-size: 24px; line-height: 1.2; }
+    .body p { margin: 0; color: var(--muted); }
+    ul { margin: 2px 0 0; padding-left: 18px; }
+    li { margin-bottom: 4px; }
+    .tags { display: flex; flex-wrap: wrap; gap: 6px; margin-top: 4px; }
+    .tags span { padding: 2px 10px; border-radius: 999px; background: var(--chip); font-size: 13px; color: var(--muted); }
+    .links { display: flex; flex-wrap: wrap; gap: 10px; margin-top: 8px; }
+    .links a {
+      display: inline-flex;
+      align-items: center;
+      height: 38px;
+      padding: 0 16px;
+      border-radius: 10px;
+      border: 1px solid var(--border);
+      color: var(--text);
+      font-weight: 600;
+      font-size: 14px;
+      text-decoration: none;
+    }
+    .links a.primary { background: var(--accent); border-color: var(--accent); color: #111; }
+    .links a:hover { border-color: var(--accent); }
+    footer { margin-top: 40px; color: var(--muted); font-size: 14px; }
+    footer a { color: var(--accent); }
+    @media (max-width: 820px) {
+      .card { grid-template-columns: minmax(0, 1fr); }
+    }
+  </style>
+</head>
+<body>
+  <main>
+    <header>
+      <p class="handle">s-afanasiev</p>
+      <h1>Interactive web graphics</h1>
+      <p class="intro">Node.js / TypeScript engineer working on three.js and PixiJS: playable ads, floor plans turned into 3D, 360° panoramas and the geometry underneath. Every project below runs in the browser, has tests and deploys from CI.</p>
+    </header>
+
+    <section class="projects" aria-label="Projects">
+      <article class="card">
+        <a class="shot" href="https://s-afanasiev.github.io/mech-arena-playable/"><img src="images/mech-arena.jpg" width="960" height="600" alt="Mech Arena playable in a phone frame next to its build table" /></a>
+        <div class="body">
+          <p class="kind">3D playable ad · three.js</p>
+          <h2>Mech Arena</h2>
+          <p>Tap enemy mechs, charge a missile strike, finish on an end card with a store CTA.</p>
+          <ul>
+            <li>One self-contained HTML per ad network — Meta, Google, MRAID — 560 KB, checked against a budget on every build</li>
+            <li>Zero allocations in the frame loop: slot pools and <code>InstancedMesh</code>, 60 FPS at ≤ 46 draw calls</li>
+            <li>No assets: procedural mechs, canvas textures, WebAudio sound</li>
+          </ul>
+          <div class="tags"><span>three.js</span><span>WebGL</span><span>MRAID</span><span>performance</span></div>
+          <div class="links">
+            <a class="primary" href="https://s-afanasiev.github.io/mech-arena-playable/">Play demo</a>
+            <a href="https://github.com/s-afanasiev/mech-arena-playable">Source</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a class="shot" href="https://s-afanasiev.github.io/merge-guard-playable/"><img src="images/merge-guard.jpg" width="960" height="600" loading="lazy" alt="Merge Guard playable in a phone frame next to its build table" /></a>
+        <div class="body">
+          <p class="kind">2D playable ad · PixiJS</p>
+          <h2>Merge Guard</h2>
+          <p>Summon heroes, drag identical ones together to merge them, hold the gate against a wave and a boss.</p>
+          <ul>
+            <li>Vector art baked into textures once — the scene is batched sprites, no image files</li>
+            <li>Board, merge rules, path and game flow are pure modules with tests; scripted first summons for onboarding</li>
+            <li>Steady 60 FPS on an entry-level GPU in an automated playthrough</li>
+          </ul>
+          <div class="tags"><span>PixiJS</span><span>drag &amp; drop</span><span>MRAID</span><span>game design</span></div>
+          <div class="links">
+            <a class="primary" href="https://s-afanasiev.github.io/merge-guard-playable/">Play demo</a>
+            <a href="https://github.com/s-afanasiev/merge-guard-playable">Source</a>
+          </div>
+        </div>
+      </article>
+
+      <article class="card">
+        <a class="shot" href="https://s-afanasiev.github.io/region-selector-3d/"><img src="images/region-selector.jpg" width="960" height="600" loading="lazy" alt="Region Selector: apartment plan with rooms on the left, generated 3D rooms on the right" /></a>
+        <div class="body">
+          <p class="kind">Tool · three.js · computational geometry</p>
+          <h2>Region Selector 3D</h2>
+          <p>Trace regions on a floor plan or a 360° panorama: rooms become 3D walls and floors, zones become hotspots on a sphere.</p>
+          <ul>
+            <li>Own geometry: ear-clipping triangulation, self-intersection checks, mitered polygon offset</li>
+            <li>Panorama picking without ray–sphere intersection: camera ray → longitude/latitude → pixel → zone</li>
+            <li>GLB export for Blender, undo/redo, 34 tests</li>
+          </ul>
+          <div class="tags"><span>three.js</span><span>geometry</span><span>360° panorama</span><span>glTF</span></div>
+          <div class="links">
+            <a class="primary" href="https://s-afanasiev.github.io/region-selector-3d/">Open app</a>
+            <a href="https://github.com/s-afanasiev/region-selector-3d">Source</a>
+          </div>
+        </div>
+      </article>
+    </section>
+
+    <footer>
+      <a href="https://github.com/s-afanasiev">github.com/s-afanasiev</a>
+    </footer>
+  </main>
+</body>
+</html>
